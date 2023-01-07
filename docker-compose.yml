@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  app:
+    build:
+      context: ./docker
+    image: standrew-gui
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/var/www/standrew-gui
+    environment:
+      - VIRTUAL_HOST=standrew.dev
+      - VIRTUAL_PORT=4200
+    networks:
+      - default
+      - nginx-proxy
+
+networks:
+  nginx-proxy:
+    external:
+      name: nginx-proxy
